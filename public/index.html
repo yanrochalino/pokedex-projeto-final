@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pokédex do Time</title>
+  <meta name="description" content="Ranking colaborativo de Pokémon do time, com dados da PokeAPI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topo">
+    <h1 class="topo__titulo">Pokédex do Time</h1>
+    <p class="topo__texto">Busque um Pokémon, dê uma nota e monte o ranking do grupo.</p>
+  </header>
+
+  <main class="layout">
+    <section class="scanner" id="scanner" aria-labelledby="t-busca">
+      <h2 class="scanner__titulo" id="t-busca">Buscar Pokémon</h2>
+
+      <form class="busca" id="form-busca" role="search">
+        <label class="oculto" for="busca">Nome ou número do Pokémon</label>
+        <input id="busca" class="campo" placeholder="Nome ou número, ex.: pikachu ou 25" autocomplete="off" required />
+        <button class="botao" type="submit">Buscar</button>
+      </form>
+
+      <div class="sugestoes">
+        <span>Sugestões:</span>
+        <button class="sugestao" type="button" data-nome="pikachu">pikachu</button>
+        <button class="sugestao" type="button" data-nome="eevee">eevee</button>
+        <button class="sugestao" type="button" data-nome="gengar">gengar</button>
+        <button class="sugestao" type="button" data-nome="charizard">charizard</button>
+      </div>
+
+      <p class="msg" id="msg-busca" role="status"></p>
+
+      <article class="achado" id="resultado" hidden>
+        <div class="achado__arte"><img id="res-img" alt="" /></div>
+        <div>
+          <h3 class="achado__nome" id="res-nome"></h3>
+          <ul class="chips" id="res-tipos"></ul>
+          <p class="achado__medidas" id="res-medidas"></p>
+        </div>
+      </article>
+
+      <form class="salvar" id="form-salvar" hidden>
+        <fieldset class="nota">
+          <legend>Sua nota de 0 a 10</legend>
+          <div class="nota__opcoes" id="nota-opcoes"></div>
+        </fieldset>
+        <label class="rotulo">Seu nome
+          <input class="campo" id="autor" maxlength="40" placeholder="Como o time vai ver você" />
+        </label>
+        <label class="rotulo">Comentário
+          <input class="campo" id="comentario" maxlength="280" placeholder="Por que esse Pokémon merece a nota?" />
+        </label>
+        <button class="botao botao--cheio" type="submit">Salvar no ranking</button>
+        <p class="msg" id="msg-salvar" role="status"></p>
+      </form>
+    </section>
+
+    <section class="ranking" aria-labelledby="t-rank">
+      <div class="ranking__cabeca">
+        <h2 id="t-rank">Ranking do time</h2>
+        <p class="ranking__resumo" id="resumo"></p>
+      </div>
+      <ol class="lista" id="lista"></ol>
+      <div class="vazio" id="vazio" hidden>
+        <p class="vazio__titulo">O ranking está vazio</p>
+        <p>Busque um Pokémon, dê uma nota e salve. Ele aparece aqui na hora.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
